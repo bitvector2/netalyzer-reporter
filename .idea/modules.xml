@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/netalyzer-reporter.iml" filepath="$PROJECT_DIR$/.idea/modules/netalyzer-reporter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/netalyzer-reporter_main.iml" filepath="$PROJECT_DIR$/.idea/modules/netalyzer-reporter_main.iml" group="netalyzer-reporter" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/netalyzer-reporter_test.iml" filepath="$PROJECT_DIR$/.idea/modules/netalyzer-reporter_test.iml" group="netalyzer-reporter" />
     </modules>
   </component>
 </project>

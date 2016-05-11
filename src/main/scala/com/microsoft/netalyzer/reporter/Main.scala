@@ -13,16 +13,25 @@ object Main {
   def main(args: Array[String]) = {
     sqlContext.setConf("spark.sql.orc.filterPushdown", "true")
 
+    val t0 = System.currentTimeMillis
+
     val cookedDf = sqlContext
       .read
       .format("orc")
       .load(settings.inputDataSpec)
 
-    cookedDf.registerTempTable("cookedDf")
+    cookedDf.registerTempTable("data")
 
-    println("Cooked Data:  " + cookedDf.count() + " (rows) ")
-    cookedDf.printSchema()
-    cookedDf.show(1000)
+    sqlContext.sql("select count(*) as count, timestamp from data group by timestamp order by count")
+      .coalesce(1)
+      .write
+      .format("com.databricks.spark.csv")
+      .option("header", "true")
+      .mode("overwrite")
+      .save(settings.outputDataSpec)
+
+    val t1 = System.currentTimeMillis
+    println("Elapsed Time: " + (t1 - t0) / 1000)
   }
 
 }

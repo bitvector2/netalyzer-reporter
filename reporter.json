@@ -1,6 +1,6 @@
 {
   "name": "netalyzer-reporter",
-  "className": "com.microsoft.netalyzer.loader.Main",
+  "className": "com.microsoft.netalyzer.reporter.Main",
   "file": "wasb:///Microsoft/NetalyzerJobs/netalyzer-reporter-1.0.0-all.jar",
   "files": [
     "wasb:///Microsoft/NetalyzerJobs/hive-site.xml"

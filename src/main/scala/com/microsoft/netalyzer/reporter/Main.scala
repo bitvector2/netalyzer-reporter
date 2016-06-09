@@ -15,7 +15,7 @@ object Main {
 
     val t0 = System.currentTimeMillis
 
-    val blah = sqlContext.sql("select count(*) as count, datetime from netalyzer.samples group by datetime order by count").collect()
+    val blah = sqlContext.sql("select datetime, count(*) as count from netalyzer.samples group by datetime order by datetime").collect()
     blah.foreach(println)
 
     val t1 = System.currentTimeMillis

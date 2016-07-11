@@ -1,14 +1,15 @@
 {
-  "name": "netalyzer-reporter-1.0.1",
+  "name": "netalyzer-reporter-1.0.2",
   "className": "com.microsoft.netalyzer.reporter.Main",
-  "file": "wasb:///Microsoft/NetalyzerJobs/netalyzer-reporter-1.0.1-all.jar",
+  "file": "wasb:///Microsoft/NetalyzerJobs/netalyzer-reporter-1.0.2-all.jar",
   "files": [
     "wasb:///Microsoft/NetalyzerJobs/hive-site.xml"
   ],
   "jars": [
     "wasb:///Microsoft/NetalyzerJobs/datanucleus-api-jdo-3.2.6.jar",
     "wasb:///Microsoft/NetalyzerJobs/datanucleus-rdbms-3.2.9.jar",
-    "wasb:///Microsoft/NetalyzerJobs/datanucleus-core-3.2.10.jar"
+    "wasb:///Microsoft/NetalyzerJobs/datanucleus-core-3.2.10.jar",
+    "wasb:///Microsoft/NetalyzerJobs/sqljdbc42.jar"
   ],
   "driverMemory": "16G",
   "driverCores": 8,

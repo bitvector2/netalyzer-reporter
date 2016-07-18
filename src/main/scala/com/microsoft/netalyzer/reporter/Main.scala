@@ -15,32 +15,7 @@ object Main {
 
     val t0 = System.currentTimeMillis
 
-    val blah = sqlContext.sql("select datetime, count(*) as count from netalyzer.samples group by datetime order by datetime").collect()
-    blah.foreach(println)
-
-    val t1 = System.currentTimeMillis
-    println("Elapsed Time: " + (t1 - t0) / 1000)
-  }
-
-
-  /*
-  def materializeDeltas(sc: SQLContext): Unit = {
-
-      sc.sql(
-      """
-        CREATE TABLE IF NOT EXISTS netalyzer.deltas (
-          deltaseconds INT,
-          deltarxbytes INT,
-          deltatxbytes INT,
-          id VARCHAR(127)
-        )
-        CLUSTERED BY(id) INTO 16 BUCKETS
-        STORED AS ORC
-        TBLPROPERTIES("transactional"="true")
-      """.stripMargin
-    )
-
-    val deltasDf = sc.sql(
+    val deltas = sqlContext.sql(
       """
         SELECT unix_timestamp(datetime) - lag(unix_timestamp(datetime)) OVER (PARTITION BY hostname, portname ORDER BY datetime) AS deltaseconds,
           CASE WHEN (lag(totalrxbytes) OVER (PARTITION BY hostname, portname ORDER BY datetime) > totalrxbytes)
@@ -56,17 +31,13 @@ object Main {
       """.stripMargin
     ).repartition(16)
 
-    deltasDf.printSchema()
-    deltasDf.show(100)
+    val t1 = System.currentTimeMillis
+    println("Elapsed Time: " + (t1 - t0) / 1000)
 
-    sc.sql(
-      """
-        TRUNCATE TABLE netalyzer.deltas
-      """.stripMargin
-    )
+    val jdbcProp = new java.util.Properties
+    jdbcProp.setProperty("user", settings.jdbcUser)
+    jdbcProp.setProperty("password", settings.jdbcPassword)
 
-    deltasDf.write.mode("append").saveAsTable("netalyzer.deltas")
+    deltas.write.mode("overwrite").jdbc(settings.jdbcUrl, "NETALYZER_DELTAS", jdbcProp)
   }
-  */
-
 }

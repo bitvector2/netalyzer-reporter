@@ -12,8 +12,8 @@
     "wasb:///Microsoft/NetalyzerJobs/sqljdbc42.jar"
   ],
   "driverMemory": "16G",
-  "driverCores": 8,
+  "driverCores": 31,
   "executorMemory": "16G",
-  "executorCores": 8,
-  "numExecutors": 6
+  "executorCores": 31,
+  "numExecutors": 14
 }
